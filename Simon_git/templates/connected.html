@@ -1,0 +1,50 @@
+<html>
+<head>
+<script>
+function clickit()
+{
+document.getElementById("nbcasestt").style.visibility = "visible";
+document.getElementById("nbcasest").style.visibility = "visible";
+document.getElementById("nbcasesc").style.visibility = "visible";
+}
+</script>
+
+</head>
+
+<body>
+<h1> Je suis connecté  </h1>
+<div>Salut {{ username }}</div>
+<ul>
+<br><a href='/logout'>logout</a><br><br>
+<li><a href='highscores'>aller vers highscores</a></li>
+<li><a href='profile'>voir mon profil</a></li>
+<li><button onclick = "clickit();">commencer une nouvelle partie</button></li>
+</ul>
+
+<p id='nbcasestt' style = "visibility: hidden">Nombre de touches :</p>
+
+<form method='get' action='/newgame'>
+<input type='text' id='nbcasest' name='nbcasest' style = "visibility: hidden"><br><br>
+<input type='submit' id='nbcasesc' name='nbcasesc' value = 'Valider' style = "visibility: hidden">
+</form>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
