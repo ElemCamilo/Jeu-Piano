@@ -1,0 +1,112 @@
+
+
+
+
+#Procedures
+
+create or replace PROCEDURE Inserer_Coup(vEtat IN Coups.Etat%TYPE) AS
+
+
+BEGIN
+
+
+Insert into Coups
+values (1, 1, 1, vEtat);
+COMMIT;
+
+END;
+
+
+create or replace PROCEDURE Inserer_Partie(vPseudo IN Joueur.Pseudo%TYPE, vNiveau IN joueur.idniveau%TYPE) AS
+
+
+BEGIN
+
+
+INSERT INTO Partie
+Values (1, vPseudo, vNiveau, TO_DATE(SYSDATE, 'DD/MM/YYYY HH24:MI:SS'), 0);
+COMMIT;
+
+END;
+
+
+create or replace PROCEDURE Inserer_Pseudo(vPseudo IN Joueur.Pseudo%TYPE) AS
+
+
+BEGIN
+
+
+INSERT INTO JOUEUR
+Values (vPseudo, 1, 'camilo@paradise.com', 'Elem32');
+COMMIT;
+
+END;
+
+
+create or replace PROCEDURE Recup_Niveau_NbNotes(vPseudo IN Joueur.Pseudo%TYPE, vNiveau OUT Niveau.Idniveau%TYPE, vNbnotes OUT niveau.nbnotes%TYPE) AS
+
+
+BEGIN
+
+Select J.Idniveau, N.Nbnotes 
+INTO vNiveau, vNbnotes
+from JOUEUR J, Niveau N
+WHERE J.pseudo = vPseudo AND J.Idniveau = n.idniveau;
+
+COMMIT;
+
+END;
+
+
+
+
+
+
+
+
+#Package avec une procedure
+
+
+
+
+
+
+
+
+create or replace PACKAGE melodieP AS
+
+TYPE tmel IS TABLE OF NUMBER index by binary_integer;
+
+PROCEDURE Recup_melodie(vNiveau IN Niveau.Idniveau%TYPE, MelodieF IN OUT tmel);
+
+END melodieP;
+
+create or replace PACKAGE body melodieP AS
+
+
+PROCEDURE Recup_melodie(vNiveau IN Niveau.Idniveau%TYPE, MelodieF IN OUT tmel) IS
+
+i NUMBER := 1;
+
+BEGIN
+
+FOR cmel IN (SELECT NUMNOTE as num
+             FROM MELODIE
+             WHERE MANCHE = (SELECT MAX(Manche) 
+                            FROM melodie
+                            WHERE idniveau = vNiveau))
+LOOP
+
+MelodieF(i) := cmel.num;
+i := i + 1; 
+
+END LOOP;
+
+END recup_melodie;
+
+END melodieP;
+
+
+
+
+
