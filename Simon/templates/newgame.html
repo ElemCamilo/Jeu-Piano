@@ -12,6 +12,17 @@ function clickit(touche)
     ajouter_elem_liste_melodie(melodie_joue, touche);
 }
 
+
+//Fonction pour envoyer le form
+
+function form_send(liste_form)
+{
+	touches_func();
+	var liste_str = liste_form.toString();
+      document.getElementById('coup').value = "[" + liste_str + "]";
+	document.getElementById('liste_coup').submit();
+}
+
 //Pour construire le coup joué
 
 function ajouter_elem_liste_melodie(liste, elem)
@@ -25,19 +36,15 @@ function ajouter_elem_liste_melodie(liste, elem)
             it++;
         }
         else
-        {
-            touches_func();
-            var liste_str = liste.toString();
-            document.getElementById('coup').value = "[" + liste_str + "]";
-            document.getElementById('liste_coup').submit();
+        {	
+		let t_form = 1000;
+		const func_form = setTimeout(form_send, t_form, liste);
         }
     }
     if (liste.length == indice_int)
     {
-        touches_func();
-        var liste_str = liste.toString();
-        document.getElementById('coup').value = "[" + liste_str + "]";
-        document.getElementById('liste_coup').submit();
+        let t_form = 1000;
+	  const func_form = setTimeout(form_send, t_form, liste);
     }
 }
 
@@ -145,7 +152,7 @@ const compteur_partie = setTimeout(touches_partie, temps_partie, i);
 
 <!--Audio-->
 
-<audio id="son" src="../static/sound/do.mp3">
+<audio id="son" src="../static/sound/do_court.mp3">
 </audio>
 
 
