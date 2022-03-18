@@ -3,75 +3,132 @@
 <head>
 <script>
 
-//Fonctions click des touches
-
-function clickit_Do(binaire)
-{
-document.getElementById("Do").value = binaire;
-}
-function clickit_Re(binaire)
-{
-document.getElementById("Re").value = binaire;
-}
-function clickit_Mi(binaire)
-{
-document.getElementById("Mi").value = binaire;
-}
-function clickit_Fa(binaire)
-{
-document.getElementById("Fa").value = binaire;
-}
-function clickit_Sol(binaire)
-{
-document.getElementById("Sol").value = binaire;
-}
-function clickit_La(binaire)
-{
-document.getElementById("La").value = binaire;
-}
-function clickit_Si(binaire)
-{
-document.getElementById("Si").value = binaire;
-}
-
-//Pour Afficher et Cacher des images après un certain temps
 
 
-/*
-let temps_action = 2000
-const myTimeout_action= setTimeout(chgimage_action, temps_action);
+//Fonction click des touches
 
-function chgimage_action()
+function clickit(touche)
 {
-document.getElementById("action").style.visibility = "visible";
-document.getElementById("base").style.visibility = "hidden";
-let temps_base = 2000
-const myTimeout_base = setTimeout(chgimage_base, temps_base);
-}*/
-/*
-function chgimage_base()
-{
-document.getElementById("action").style.visibility = "hidden";
-document.getElementById("base").style.visibility = "visible";
-let temps_action = 2000
-const myTimeout_action= setTimeout(chgimage_action, temps_action);
-}*/
+    ajouter_elem_liste_melodie(melodie_joue, touche);
+}
 
-/////
-let temps_action = 0
-const compteur_fonct = setTimeout(touches_func, temps_action);
+//Pour construire le coup joué
+
+function ajouter_elem_liste_melodie(liste, elem)
+{
+
+    if (liste.length < indice_int)
+    {
+        if (melodie_int[it] == elem)
+        {
+            liste.push(elem);
+            it++;
+        }
+        else
+        {
+            touches_func();
+            var liste_str = liste.toString();
+            document.getElementById('coup').value = "[" + liste_str + "]";
+            document.getElementById('liste_coup').submit();
+        }
+    }
+    if (liste.length == indice_int)
+    {
+        touches_func();
+        var liste_str = liste.toString();
+        document.getElementById('coup').value = "[" + liste_str + "]";
+        document.getElementById('liste_coup').submit();
+    }
+}
+
+
+//Son au click
+
+function JouerSon() {
+    var sound = document.getElementById("son");
+    sound.play();
+}
+
+
+
+//Pour desactiver les touches cliquables du piano
+
 
 function touches_func()
 {
-    var elem = '{{ nbnotes }}';
-    var thing = parseInt(elem);
-    for(let i = 1; i <= thing; i++)
+    for(let i = 1; i <= 7; i++)
     {
         var num = i;
         var cle_string = num.toString();
-        document.getElementById(cle_string).style.visibility = "visible";
+        document.getElementById(cle_string).disabled = true;
     }
 }
+
+
+
+
+//Pour Cacher des images
+
+function chgimage_action(id, i, taille)
+{
+    i++;
+    var id_string = id;
+    var id_int = parseInt(id_string);
+    id_int = id_int - 7;
+    var id_string7 = id_int.toString();
+    document.getElementById(id).style.visibility = "hidden";
+    document.getElementById(id_string7).style.visibility = "visible";
+    if (i < taille)
+    {
+    let t = 0;
+    const func_image = setTimeout(touches_partie, t, i);
+    }
+}
+
+
+//Pour afficher les cases qui doivent être joués
+
+function touches_partie(i)
+{
+    //boucle recursive pour afficher les images
+    var num = melodie_int[i] + 7;  //+7 pour prendre le images des cases qui vont au dessus, qui doivent être joués
+    var cle_string = num.toString();
+    var num_i = melodie_int[i];
+    var cle_string_i = num_i.toString();
+    document.getElementById(cle_string).style.visibility = "visible";
+    document.getElementById(cle_string_i).style.visibility = "hidden";
+    var taille = melodie_int.length;
+    let temps_chg = 1000;
+    const compteur_fonct = setTimeout(chgimage_action, temps_chg, cle_string, i, taille);
+
+    //boucle standard pour pouvoir cliquer
+    for(let i = 1; i <= 7; i++)
+    {
+        var num = i;
+        var cle_string = num.toString();
+        document.getElementById(cle_string).disabled = false;
+    }
+}
+
+
+
+//Soit on montre ce qui doit être joué soit on attend le click d'une touche
+
+var indice = "{{ indice }}";
+var indice_int = parseInt(indice);
+var melodie = '{{ melodie }}';
+var melodie_int = JSON.parse(melodie); //Transformation en liste de int
+
+
+var melodie_joue = []; //le coup
+
+let temps = 0;
+const desactiver_touches = setTimeout(touches_func, temps);
+
+var i = 0; //iterateur utilisé pour l'affichage des images
+var it = 0; //iterateur de coup(verification melodie)
+let temps_partie = 1000;
+const compteur_partie = setTimeout(touches_partie, temps_partie, i);
 
 
 </script>
@@ -85,78 +142,116 @@ function touches_func()
 <li><a href='profile'>voir mon profil</a></li>
 </ul>
 
-<!--Touches-->
+
+<!--Audio-->
+
+<audio id="son" src="../static/sound/do.mp3">
+</audio>
 
 
-<form method = "get" action = "/newgame">
-<input type = "hidden" id = "Do" name = "Do" value = "0">
+<!--Le coup est communiqué à python pour qu'il puisse verifier s'il correspond à la melodie attendue-->
+
+<form id = "liste_coup" method = "get" action = "/newgame">
+<input type = "hidden" id = "coup" name = "coup" value = "coup">
+</form>
+
+
+<!--Touches cliquables-->
+
 <input type= "image"
        id = "1"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 50px; visibility : hidden"
-       onclick="clickit_Do('1');">
-<input type = "hidden" id = "Re" name = "Re" value = "0">
+       style = "position : absolute; top: 300px; left: 50px; visibility : visible"
+       onclick="clickit(1);JouerSon()">
 <input type= "image"
        id = "2"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 150px; visibility : hidden"
-       onclick="clickit_Re('1');">
-<input type = "hidden" id = "Mi" name = "Mi" value = "0">
+       style = "position : absolute; top: 300px; left: 150px; visibility : visible"
+       onclick="clickit(2);JouerSon()">
 <input type= "image"
        id = "3"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 250px; visibility : hidden"
-       onclick="clickit_Mi('1');">
-<input type = "hidden" id = "Fa" name = "Fa" value = "0">
+       style = "position : absolute; top: 300px; left: 250px; visibility : visible"
+       onclick="clickit(3);JouerSon()">
 <input type= "image"
        id = "4"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 350px; visibility : hidden"
-       onclick="clickit_Fa('1');">
-<input type = "hidden" id = "Sol" name = "Sol" value = "0">
+       style = "position : absolute; top: 300px; left: 350px; visibility : visible"
+       onclick="clickit(4);JouerSon()">
 <input type= "image"
        id = "5"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 450px; visibility : hidden"
-       onclick="clickit_Sol('1');">
-<input type = "hidden" id = "La" name = "La" value = "0">
+       style = "position : absolute; top: 300px; left: 450px; visibility : visible"
+       onclick="clickit(5);JouerSon()">
 <input type= "image"
        id = "6"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 550px; visibility : hidden"
-       onclick="clickit_La('1');">
-<input type = "hidden" id = "Si" name = "Si" value = "0">
+       style = "position : absolute; top: 300px; left: 550px; visibility : visible"
+       onclick="clickit(6);JouerSon()">
 <input type= "image"
        id = "7"
        src="../static/img/orange_on.png"
        width = "100"
        height = "100"
-       style = "position : absolute; top: 300px; left: 650px; visibility : hidden"
-       onclick="clickit_Si('1');">
-</form>
+       style = "position : absolute; top: 300px; left: 650px; visibility : visible"
+       onclick="clickit_Si(7);JouerSon()">
 
 <!--Touches à jouer-->
 
 <input type= "image"
-       id = "action"
+       id = "8"
        src="../static/img/orange_obscur.jpg"
-       top = "20%"
-       left = "10%"
        width = "100"
        height = "100"
        style = "position : absolute; top: 300px; left: 50px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "9"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 150px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "10"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 250px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "11"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 350px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "12"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 450px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "13"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 550px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "14"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 650px; visibility : hidden" disabled = "disabled">
 </body>
 </html>
 
