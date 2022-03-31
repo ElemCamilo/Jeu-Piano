@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+<script>
+
+let dict = {1:'do', 2:'re', 3:'mi', 4:'fa', 5:'sol', 6:'la', 7:'si'};
+
+var flag = "{{ flag }}";
+var flag_int = parseInt(flag);
+
+if (flag_int != 0)
+{
+    var ite = 0;
+    var max = 1;
+    var cpt = 2;
+    var coup = "{{ coup }}";
+    var liste_coup = JSON.parse(coup);
+    let tempsV = 0;
+    const desactiver_touchesV = setTimeout(touches_func, tempsV);
+    let timeV = 1000;
+    const montrerV = setTimeout(revoir_coup_voir, timeV, ite);
+}
+
+
+
+
+</script>
+
+</head>
+<body>
+<h1> Parties </h1>
+<ul>
+<li><a href='connection'>aller vers l accueil</a></li>
+<li><a href='highscores'>aller vers highscores</a></li>
+<li><a href='profile'>voir mon profil</a></li>
+<li><a href='niveau'>commencer une nouvelle partie</a></li>
+</ul>
+
+
+{{content}}
+
+
+<!--Audio-->
+
+<audio id="do" src="../static/sound/do.mp3">
+</audio>
+<audio id="re" src="../static/sound/re.mp3">
+</audio>
+<audio id="mi" src="../static/sound/mi.mp3">
+</audio>
+<audio id="fa" src="../static/sound/fa.mp3">
+</audio>
+<audio id="sol" src="../static/sound/sol.mp3">
+</audio>
+<audio id="la" src="../static/sound/la.mp3">
+</audio>
+<audio id="si" src="../static/sound/si.mp3">
+</audio>
+
+
+<input type= "image"
+       id = "1"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 50px; visibility : visible">
+<input type= "image"
+       id = "2"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 150px; visibility : visible">
+<input type= "image"
+       id = "3"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 250px; visibility : visible">
+<input type= "image"
+       id = "4"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 350px; visibility : visible">
+<input type= "image"
+       id = "5"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 450px; visibility : visible">
+<input type= "image"
+       id = "6"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 550px; visibility : visible">
+<input type= "image"
+       id = "7"
+       src="../static/img/orange_on.png"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 650px; visibility : visible">
+
+<!--Touches à jouer-->
+
+<input type= "image"
+       id = "8"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 50px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "9"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 150px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "10"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 250px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "11"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 350px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "12"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 450px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "13"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 550px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "14"
+       src="../static/img/orange_obscur.jpg"
+       width = "100"
+       height = "100"
+       style = "position : absolute; top: 300px; left: 650px; visibility : hidden" disabled = "disabled">
+
+
+</body>
+</html>
