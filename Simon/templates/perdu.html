@@ -1,0 +1,29 @@
+<html>
+<head>
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+
+<script>
+let te = 0;
+const message = setTimeout(son_jouer, te, 'envrai');
+</script>
+</head>
+<body>
+<h1> Perdu </h1>
+<ul>
+<div>{{username}}, tu as malheureusement perdu au niveau {{niveau}} et tu as donc fait {{score}} points.</div>
+<li>
+<a href = 'profile'> Retour vers le profile </a>
+</li>
+<li>
+<a href = 'niveau'> Recommencer le niveau </a>
+</li>
+</ul>
+
+
+<!--Audio-->
+
+<audio id="envrai" src="../static/sound/envrai.mp3">
+</audio>
+</body>
+</html>

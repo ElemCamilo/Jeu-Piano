@@ -1,0 +1,34 @@
+<html>
+<head>
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+
+<script>
+let tm = 0;
+const message = setTimeout(son_jouer, tm, 'trop_facile');
+</script>
+</head>
+<body>
+<h1> Bravo !!!</h1>
+<ul>
+<div>Felicitations {{username}}, tu as reussi le niveau {{niveau}} et tu as fait {{score}} points.</div>
+
+{{content}}
+
+<li>
+<a href = 'profile'> Retour vers le profile </a>
+</li>
+<li>
+<a href = 'niveau'> Recommencer ou aller au niveau suivant </a>
+</li>
+</ul>
+</ul>
+
+<!--Audio-->
+
+
+<audio id="trop_facile" src="../static/sound/izi_pizi.mp3">
+</audio>
+
+</body>
+</html>
