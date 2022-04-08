@@ -1,0 +1,41 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Jeu Simon</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+
+<script>
+let tm = 0;
+var liste_b = ['trop_facile','anariqui','cavab'];
+const message = setTimeout(son_jouer, tm, liste_b);
+</script>
+</head>
+<body>
+<h1> Bravo !!!</h1>
+
+<p>Felicitations {{username}}, tu as reussi le niveau {{niveau}} et tu as fait {{score}} points.</p>
+
+{{content}}
+
+<ul>
+<li>
+<a href = 'profile'> Retour vers le profile </a>
+</li>
+<li>
+<a href = 'niveau'> Recommencer ou aller au niveau suivant </a>
+</li>
+</ul>
+
+<!--Audio-->
+
+
+<audio id="trop_facile" src="../static/sound/izi_pizi.mp3">
+</audio>
+<audio id="anariqui" src="../static/sound/anaelle1.mp3">
+</audio>
+<audio id="cavab" src="../static/sound/adrien1.mp3">
+</audio>
+</body>
+</html>

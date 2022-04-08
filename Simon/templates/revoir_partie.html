@@ -1,0 +1,168 @@
+﻿<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Jeu Simon</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+<script>
+
+let dict = {1:'do', 2:'re', 3:'mi', 4:'fa', 5:'sol', 6:'la', 7:'si'};
+
+var flag = "{{ flag }}";
+var flag_int = parseInt(flag);
+
+if (flag_int != 0)
+{
+    var ite = 0;
+    var max = 1;
+    var cpt = 2;
+    var coup = "{{ coup }}";
+    var liste_coup = JSON.parse(coup);
+    let tempsV = 0;
+    const desactiver_touchesV = setTimeout(touches_func, tempsV);
+    let timeV = 1000;
+    const montrerV = setTimeout(revoir_coup_voir, timeV, ite);
+}
+
+
+
+
+</script>
+</head>
+<body>
+<h1> Parties </h1>
+<ul>
+<li><a href='connection'>aller vers l'accueil</a></li>
+<li><a href='highscores'>aller vers highscores</a></li>
+<li><a href='profile'>voir mon profil</a></li>
+<li><a href='niveau'>commencer une nouvelle partie</a></li>
+</ul>
+
+
+{{content}}
+
+
+<!--Audio-->
+
+<audio id="do" src="../static/sound/do.mp3">
+</audio>
+<audio id="re" src="../static/sound/re.mp3">
+</audio>
+<audio id="mi" src="../static/sound/mi.mp3">
+</audio>
+<audio id="fa" src="../static/sound/fa.mp3">
+</audio>
+<audio id="sol" src="../static/sound/sol.mp3">
+</audio>
+<audio id="la" src="../static/sound/la.mp3">
+</audio>
+<audio id="si" src="../static/sound/si.mp3">
+</audio>
+
+
+<input type= "image"
+       id = "1"
+       src="../static/img/touche_blanche.png"
+       alt = "touche blanche"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 50px; visibility : visible">
+<input type= "image"
+       id = "2"
+       src="../static/img/touche_noire.png"
+       alt = "touche noire"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 130px; visibility : visible">
+<input type= "image"
+       id = "3"
+       src="../static/img/touche_blanche.png"
+       alt = "touche blanche"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 210px; visibility : visible">
+<input type= "image"
+       id = "4"
+       src="../static/img/touche_noire.png"
+       alt = "touche noire"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 290px; visibility : visible">
+<input type= "image"
+       id = "5"
+       src="../static/img/touche_blanche.png"
+       alt = "touche blanche"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 370px; visibility : visible">
+<input type= "image"
+       id = "6"
+       src="../static/img/touche_noire.png"
+       alt = "touche noire"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 450px; visibility : visible">
+<input type= "image"
+       id = "7"
+       src="../static/img/touche_blanche.png"
+       alt = "touche blanche"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 530px; visibility : visible">
+
+<!--Touches à jouer-->
+
+<input type= "image"
+       id = "8"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 50px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "9"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 130px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "10"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 210px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "11"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 290px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "12"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 370px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "13"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 450px; visibility : hidden" disabled = "disabled">
+<input type= "image"
+       id = "14"
+       src="../static/img/touche_jouer.png"
+       alt = "touche jouer"
+       width = "80"
+       height = "250"
+       style = "position : absolute; top: 200px; left: 530px; visibility : hidden" disabled = "disabled">
+
+
+</body>
+</html>

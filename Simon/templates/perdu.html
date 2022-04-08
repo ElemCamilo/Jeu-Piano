@@ -1,0 +1,43 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Jeu Simon</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+
+<script>
+let te = 0;
+var liste_e = ['envrailolo','envraiadri','cava','ananull','leanull'];
+const message = setTimeout(son_jouer, te, liste_e);
+</script>
+</head>
+<body>
+<h1> Perdu </h1>
+
+<p>{{username}}, tu as malheureusement perdu au niveau {{niveau}} et tu as donc fait {{score}} points.</p>
+
+<ul>
+<li>
+<a href = 'profile'> Retour vers le profile </a>
+</li>
+<li>
+<a href = 'niveau'> Recommencer le niveau </a>
+</li>
+</ul>
+
+
+<!--Audio-->
+
+<audio id="envrailolo" src="../static/sound/envrai.mp3">
+</audio>
+<audio id="envraiadri" src="../static/sound/adrien1.mp3">
+</audio>
+<audio id="cava" src="../static/sound/adrien2.mp3">
+</audio>
+<audio id="ananull" src="../static/sound/anaelle2.mp3">
+</audio>
+<audio id="leanull" src="../static/sound/lea.mp3">
+</audio>
+</body>
+</html>

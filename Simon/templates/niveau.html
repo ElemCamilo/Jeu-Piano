@@ -1,0 +1,22 @@
+﻿<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Jeu Simon</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<h1> Niveau </h1>
+
+<ul>
+<li><a href='connection'>aller vers l'accueil</a></li>
+<li><a href='highscores'>aller vers highscores</a></li>
+<li><a href='profile'>voir mon profil</a></li>
+<li><a href='revoir_partie'>revoir une partie</a></li>
+</ul>
+
+{{content}}
+
+{{content_niveau}}
+
+</body>
+</html>
